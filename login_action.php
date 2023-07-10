@@ -12,7 +12,7 @@ if (isset($_POST['email'])&&isset($_POST['password'])) {
 		if (mysqli_num_rows($result) == 1) {
 			$_SESSION['email'] = $email;
 			$_SESSION['alert'] = NULL;
-			header('location: dashboard.php');
+			header('location: index.php');
 		} else {
 			$_SESSION['alert'] = 'gagal';
 			header('location: login.php');
