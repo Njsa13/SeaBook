@@ -1,5 +1,6 @@
 <?php
 session_start();
+if (!empty($_SESSION['status'])) {
 ?>
 
 <!doctype html>
@@ -12,7 +13,7 @@ session_start();
     include "../css/link.php";
     ?>
   </head>
-  <body class="d-flex flex-column" style="min-height: 625px;">
+  <body class="d-flex flex-column" style="min-height: 39.09rem;">
     <?php
     include "../layout/admin_header.php";
     ?>
@@ -114,3 +115,9 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<?php
+} else {
+  header('location: index.php');
+}
+?>

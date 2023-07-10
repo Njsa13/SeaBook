@@ -33,7 +33,7 @@
                 </svg>
                 List Buku
             </a>
-            <a class="btn btn-danger ms-4 mt-3" href="#">Keluar</a>
+            <a class="btn btn-danger ms-4 mt-3" href="../adminpanel/logout.php">Keluar</a>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            <h2 style="font-family: 'Verdana'; color: #3B7890;">Admin</h2>
+            <h2 style="font-family: 'Verdana'; color: #3B7890;"><?php echo $_SESSION['username'];?></h2>
         </div>
         <hr>
         <div class="d-flex flex-column flex-shrink-0">
@@ -87,7 +87,7 @@
                 </li>
                 <hr>
                 <li class="ms-5">
-                    <a class="btn btn-danger ms-4" href="#">Keluar</a>
+                    <a class="btn btn-danger ms-4" href="../adminpanel/logout.php">Keluar</a>
                 </li>
             </ul>
         </div>
