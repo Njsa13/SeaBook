@@ -99,12 +99,12 @@ footer p {
 }
 
 /*Content*/
-.jumbotron h1, .content h5, .more, .price, .login h1 {
+.jumbotron h1, .content h5, .more, .price, .login h1, .profile-menu h1, .profile-menu h5 {
 	font-weight: 900;
 	letter-spacing: 2px;
 }
 
-.content a {
+.content a, .profile-menu .card a {
 	text-decoration: none;
 }
 
@@ -132,7 +132,7 @@ html .login-page {
 	margin-top: -40px;
 }
 
-.login h1 {
+.login h1, .profile-menu h1, .profile-menu h5 {
 	 color:  #237699;
 }
 
@@ -143,6 +143,18 @@ html .login-page {
 	right: 12px;
 	font-size: 20px;
 }
+
+
+/*Profile*/
+.jk-label {
+	font-size:12px;
+	color: #2FA0D0;
+}
+
+.profile-menu .card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .15);
+}
+
 
 /*Text Input*/
 .input-container{
