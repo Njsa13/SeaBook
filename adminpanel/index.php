@@ -7,7 +7,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Login Admin</title>
     <?php
     include "../css/link.php";
     ?>
@@ -32,7 +32,7 @@ session_start();
     <section class="login mt-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-4">
+          <div class="col-lg-4 col-10">
             <?php
             if (isset($_SESSION['alert'])) {
                 echo '

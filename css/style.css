@@ -132,7 +132,7 @@ html .login-page {
 	margin-top: -40px;
 }
 
-.login h1, .profile-menu h1, .profile-menu h5 {
+.login h1, .profile-menu h1, .profile-menu h5, .accordion strong {
 	 color:  #237699;
 }
 
@@ -146,12 +146,12 @@ html .login-page {
 
 
 /*Profile*/
-.jk-label {
+.jk-label, {
 	font-size:12px;
 	color: #2FA0D0;
 }
 
-.profile-menu .card {
+.profile-menu .card, .accordion-item {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .15);
 }
 
@@ -189,4 +189,10 @@ html .login-page {
 	top:-12px;
 	font-size:12px;
 	color: #2FA0D0;
+}
+
+/*tooltip*/
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-dark);
+  --bs-tooltip-max-width: 250px;
 }

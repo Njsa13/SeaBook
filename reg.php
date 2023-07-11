@@ -20,7 +20,7 @@ session_start();
     <section class="login mt-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-4">
+          <div class="col-lg-4 col-10">
             <?php
             if (isset($_SESSION['alert'])) {
                 echo '

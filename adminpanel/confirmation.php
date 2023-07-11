@@ -25,7 +25,7 @@ if (!empty($_SESSION['status'])) {
           <?php
             include "../lib/connection.php";
 
-            $sql = "SELECT DISTINCT(transaksi.id_transaksi), nama, email, virtual_account, SUM(harga_beli * jumlah_buku) AS total_harga, tanggal_transaksi, waktu_transaksi, status_transaksi FROM transaksi LEFT JOIN pembayaran USING(id_transaksi) LEFT JOIN keranjang USING(id_transaksi) LEFT JOIN user ON user.id_user=keranjang.id_user GROUP BY id_transaksi ORDER BY transaksi.id_transaksi DESC;";
+            $sql = "SELECT transaksi.id_transaksi, nama, email, metode_pembayaran, virtual_account, SUM(harga_beli * jumlah_buku) + biaya_kirim AS total_harga, tanggal_transaksi, waktu_transaksi, alamat, metode_pengiriman, status_transaksi FROM transaksi LEFT JOIN pembayaran USING(id_transaksi) LEFT JOIN keranjang USING(id_transaksi) LEFT JOIN user ON user.id_user=keranjang.id_user GROUP BY id_transaksi ORDER BY transaksi.id_transaksi DESC;";
 
             $result = mysqli_query($link, $sql);
             ?>
@@ -36,8 +36,11 @@ if (!empty($_SESSION['status'])) {
                 <th>Email</th>
                 <th>Virtual Account</th>
                 <th>Tanggal Transaksi</th>
-                <th>Total Harga</th>
+                <th>Total Pembayaran</th>
                 <th>Waktu Transaksi</th>
+                <th>Metode Pengiriman</th>
+                <th>Metode Pembayaran</th>
+                <th>Alamat</th>
                 <th>Status Transaksi</th>
                 <th>Aksi</th>
               </tr>
@@ -51,15 +54,18 @@ if (!empty($_SESSION['status'])) {
                 <td><?php echo $row['tanggal_transaksi']; ?></td>
                 <td><?php echo $row['total_harga']; ?></td>
                 <td><?php echo $row['waktu_transaksi']; ?></td>
+                <td><?php echo $row['metode_pengiriman']; ?></td>
+                <td><?php echo $row['metode_pembayaran']; ?></td>
+                <td><?php echo $row['alamat']; ?></td>
                 <td><?php echo $row['status_transaksi']; ?></td>
                 <td>
                   <?php
                     $link = 'confirm_action.php?id='.$row['id_transaksi'].'&status='.$row['status_transaksi'];
 
                     if ($row['status_transaksi']=='Menunggu') {
-                      echo '<a href="'.$link.'" class="btn btn-primary btn-sm">Konfirmasi</a>';
+                      echo '<a href="'.$link.'" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">Confirm</a>';
                     } else if ($row['status_transaksi']=='Dikemas') {
-                      echo '<a href="'.$link.'" class="btn btn-warning btn-sm">Konfirmasi</a>';
+                      echo '<a href="'.$link.'" class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">Confirm</a>';
                     } else {
                       echo "----";
                     }

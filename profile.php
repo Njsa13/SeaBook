@@ -1,4 +1,7 @@
-<?php session_start() ?>
+<?php
+session_start();
+if (!empty($_SESSION['email'])) {
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,20 +19,6 @@
             $( "#birthdate" ).datepicker();
         } );
     </script>
-    <style>
-        .profile-menu h5 {
-            font-weight: 900;
-            letter-spacing: 2px;
-            color:  #237699;
-        }
-        .profile-menu .card a {
-            text-decoration: none ;
-        }
-
-        .profile-menu .card {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, .15);
-        }
-    </style>
 </head>
 <body>
 	<?php
@@ -39,16 +28,8 @@
     <section class="profile-menu">
         <div class="container mt-5">
             <div class="row justify-content-around">
-                <div class="col-lg-3 col-8 mb-5">
-                    <div class="card border border-0">
-                      <div class="card-body mt-3 ms-4">
-                        <a href="profile.php"><h5 class="mb-3">Profile</h5></a>
-                        <a href=""><h5 class="mb-3">Pesanan</h5></a>
-                        <a href="logout.php"><h5 class="mb-3">Keluar</h5></a>
-                      </div>
-                    </div>
-                </div>
                 <?php
+                include 'layout/menu_profile.php';
                 include 'lib/connection.php';
 
                 $email = $_SESSION['email'];
@@ -56,7 +37,7 @@
                 $result = mysqli_query($link, $query);
                 $row = mysqli_fetch_assoc($result);
                 ?>
-                <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="col-lg-6 mb-5 mb-lg-0 col-10">
                     <?php
                     if (isset($_SESSION['alert'])) {
                         echo '
@@ -108,5 +89,15 @@
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
 </body>
 </html>
+
+<?php
+} else {
+  header('location: index.php');
+}
+?>
