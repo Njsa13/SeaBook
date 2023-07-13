@@ -80,22 +80,9 @@ session_start();
                     ?>
                     " class="card-img-top" width="164px">
                     <div class="card-body">
-                      <p class="writter"><?php
-                      if (strlen($row['penulis']) > 14) {
-                        echo substr($row['penulis'], 0, 14).'...';                   
-                      } else {
-                        echo $row['penulis'];
-                      }
-                         
-                      ?></p>
-                      <p class="card-text book-title"><?php
-                      if (strlen($row['judul_buku']) > 14) {
-                        echo substr($row['judul_buku'], 0, 14).'...'; 
-                      } else {
-                        echo $row['judul_buku']; 
-                      }
-                      ?></p>
-                      <p class="price text-primary">Rp <?php echo number_format($row['harga'], 0, ",", "."); ?></p>
+                      <p class="writter shorten-text"><?php echo $row['penulis']; ?></p>
+                      <p class="card-text book-title shorten-text" style="font-size: 14px;"><?php echo $row['judul_buku']; ?></p>
+                      <p class="price text-primary" style="font-size: 14px;">Rp <?php echo number_format($row['harga'], 0, ",", "."); ?></p>
                     </div>
                   </div>
                 </a>
@@ -144,22 +131,9 @@ session_start();
                     ?>
                     " class="card-img-top" width="164px">
                     <div class="card-body">
-                      <p class="writter"><?php
-                      if (strlen($row['penulis']) > 14) {
-                        echo substr($row['penulis'], 0, 14).'...';                   
-                      } else {
-                        echo $row['penulis'];
-                      }
-                         
-                      ?></p>
-                      <p class="card-text book-title"><?php
-                      if (strlen($row['judul_buku']) > 14) {
-                        echo substr($row['judul_buku'], 0, 14).'...'; 
-                      } else {
-                        echo $row['judul_buku']; 
-                      }
-                      ?></p>
-                      <p class="price text-primary">Rp <?php echo number_format($row['harga'], 0, ",", "."); ?></p>
+                      <p class="writter shorten-text"><?php echo $row['penulis']; ?></p>
+                      <p class="card-text book-title shorten-text" style="font-size: 14px;"><?php echo $row['judul_buku']; ?></p>
+                      <p class="price text-primary" style="font-size: 14px;">Rp <?php echo number_format($row['harga'], 0, ",", "."); ?></p>
                     </div>
                   </div>
                 </a>
@@ -170,11 +144,7 @@ session_start();
         </div>
       </div>
     </section>
-    <footer class="pt-3 pb-1 text-center">
-        <div class="container">
-            <p>&copy; 2023 PT. SeaBook</p>
-        </div>
-    </footer>
+    <?php include 'layout/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

@@ -41,7 +41,7 @@ if (mysqli_query($link, $sql)) {
         }
 
         // Upload gambar baru
-        $target_dir = "images/"; // Directory to save the uploaded image
+        $target_dir = "../assets/img/buku/"; // Directory to save the uploaded image
         $target_file = $target_dir . basename($_FILES['gambar']['name']);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

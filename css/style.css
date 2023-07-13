@@ -77,6 +77,12 @@ footer p {
 		margin-left: 300px;
 		width: 1000px;
 	}
+
+	/*No Data*/
+	.no-data {
+		position: absolute;
+		left: 220px;
+	}
 }
 
 /*Jumbotron*/
@@ -114,7 +120,7 @@ footer p {
 
 .writter {
 	margin-bottom: 5px;
-	font-size: 12px;
+	font-size: 11px;
 	color: #6d6d6d;
 }
 
@@ -132,7 +138,7 @@ html .login-page {
 	margin-top: -40px;
 }
 
-.login h1, .profile-menu h1, .profile-menu h5, .accordion strong {
+.login h1, .profile-menu h1, .profile-menu h5, .accordion strong, .cart strong, .plus, .minus {
 	 color:  #237699;
 }
 
@@ -146,15 +152,25 @@ html .login-page {
 
 
 /*Profile*/
-.jk-label, {
+.jk-label, .profile-menu .email-label {
 	font-size:12px;
 	color: #2FA0D0;
 }
 
-.profile-menu .card, .accordion-item {
+.profile-menu .card, .accordion-item, .cart .card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .15);
 }
 
+/*Keranjang*/
+.counter {
+	height: 30px;
+	width: 47px;
+	text-align: center;
+}
+
+.plus, .minus {
+	cursor: pointer;
+}
 
 /*Text Input*/
 .input-container{
@@ -196,3 +212,12 @@ html .login-page {
   --bs-tooltip-bg: var(--bs-dark);
   --bs-tooltip-max-width: 250px;
 }
+
+/*Shorten text*/
+.shorten-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+

@@ -25,7 +25,7 @@ if (!empty($_SESSION['email'])) {
     include 'layout/user_header.php';
     ?>
     <br><br>
-    <section class="profile-menu">
+    <section class="profile-menu" style="margin-bottom: 2.82rem;">
         <div class="container mt-5">
             <div class="row justify-content-around">
                 <?php
@@ -37,7 +37,7 @@ if (!empty($_SESSION['email'])) {
                 $result = mysqli_query($link, $query);
                 $row = mysqli_fetch_assoc($result);
                 ?>
-                <div class="col-lg-6 mb-5 mb-lg-0 col-10">
+                <div class="col-lg-8 mb-5 mb-lg-0 col-10">
                     <?php
                     if (isset($_SESSION['alert'])) {
                         echo '
@@ -51,13 +51,13 @@ if (!empty($_SESSION['email'])) {
                     ?>
                     <h1 class="mb-4">Profile</h1>
                     <form action="edit_profile_action.php" method="POST">
-                        <div class="mb-4 input-container">
+                        <div class="mb-2 input-container">
                             <input type="text" id="name" aria-describedby="nameHelp" name="name" required oninvalid="this.setCustomValidity('Nama tidak boleh kosong')" oninput="this.setCustomValidity('')" value="<?php echo $row['nama']; ?>">
                             <label for="name" class="form-label">Nama Lengkap</label>
                         </div>
                         <div class="mb-2 input-container">
-                            <input type="email" id="email" aria-describedby="emailHelp" name="email" required oninvalid="this.setCustomValidity('Email tidak boleh kosong')" oninput="this.setCustomValidity('')" value="<?php echo $row['email']; ?>">
-                            <label for="email" class="form-label">E-mail</label>
+                            <label for="email" class="form-label email-label">E-mail</label>
+                            <input type="email" id="email" aria-describedby="emailHelp" style="margin-top: 18px; color: #BBB;" name="email" required oninvalid="this.setCustomValidity('Email tidak boleh kosong')" oninput="this.setCustomValidity('')" value="<?php echo $row['email']; ?>" disabled>
                         </div>
                         <label class="jk-label mb-2">Jenis Kelamin</label>
                         <div class="d-flex mb-4">
@@ -78,7 +78,7 @@ if (!empty($_SESSION['email'])) {
                             <input type="" id="birthdate" aria-describedby="birthdateHelp" value="<?php echo date("m/d/Y", strtotime($row['tanggal_lahir'])); ?>" name="birthdate" required oninvalid="this.setCustomValidity('Tanggal lahir tidak boleh kosong')" oninput="this.setCustomValidity('')">
                             <label for="birthdate" class="form-label">Tanggal Lahir (mm/dd/yyyy)</label>
                         </div>
-                        <div class="mb-5 input-container">
+                        <div class="mb-4 input-container">
                             <input type="tel" id="notelp" aria-describedby="notelpHelp" value="<?php echo $row['nomor_telepon']; ?>" name="notelp" required oninvalid="this.setCustomValidity('No. Telp tidak boleh kosong')" oninput="this.setCustomValidity('')">
                             <label for="notelp" class="form-label">No. Telp Anda</label>
                         </div>
@@ -88,6 +88,7 @@ if (!empty($_SESSION['email'])) {
             </div>
         </div>
     </section>
+    <?php include 'layout/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
