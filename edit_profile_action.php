@@ -21,5 +21,5 @@ if (isset($_POST['email'])) {
 } else {
 	echo "Invalid parameter";
 }
-mysqli_close($link);
+
 ?>

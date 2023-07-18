@@ -26,13 +26,13 @@ if (!empty($_SESSION['email'])) {
                 include 'lib/connection.php';
 
                 $email = $_SESSION['email'];
-                $query = "SELECT transaksi.id_transaksi, SUM(harga_beli * jumlah_buku) + biaya_kirim AS total_harga, tanggal_transaksi, waktu_transaksi, virtual_account, alamat, metode_pengiriman, biaya_kirim, status_transaksi FROM transaksi LEFT JOIN pembayaran USING(id_transaksi) LEFT JOIN keranjang USING(id_transaksi) LEFT JOIN user ON user.id_user=keranjang.id_user WHERE email = '$email' GROUP BY id_transaksi ORDER BY tanggal_transaksi DESC;";
+                $query = "SELECT transaksi.id_transaksi, SUM(harga_beli * jumlah_buku) + biaya_kirim AS total_harga, tanggal_transaksi, waktu_transaksi, virtual_account, alamat, metode_pengiriman, biaya_kirim, status_transaksi FROM transaksi LEFT JOIN pembayaran USING(id_transaksi) LEFT JOIN keranjang USING(id_transaksi) LEFT JOIN user ON user.id_user=keranjang.id_user WHERE email = '$email' GROUP BY id_transaksi ORDER BY transaksi.id_transaksi DESC;";
 
                 $result = mysqli_query($link, $query);
                 ?>
                 <div class="col-lg-8 mb-5 col-11">
                     <h1 class="mb-4">Pesanan</h1>
-                    <div class="accordion position-relative" id="accordionExample">
+                    <div class="accordion" id="accordionExample">
                       <?php
                       if (mysqli_num_rows($result)!=0) {
                       while ($row = mysqli_fetch_assoc($result)) {
@@ -123,7 +123,11 @@ if (!empty($_SESSION['email'])) {
                         </div>
                       </div>
                       <?php } } else
-                      echo '<img src="assets/img/nodata.png" class="no-data mt-5 ms-5 ms-lg-0">';
+                        echo '
+                          <div class="justify-content-center d-flex">
+                            <img src="assets/img/nodata.png" class="mt-5" width="360px">
+                          </div>
+                        ';
                       ?>
                     </div>
                 </div>

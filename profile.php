@@ -57,7 +57,7 @@ if (!empty($_SESSION['email'])) {
                         </div>
                         <div class="mb-2 input-container">
                             <label for="email" class="form-label email-label">E-mail</label>
-                            <input type="email" id="email" aria-describedby="emailHelp" style="margin-top: 18px; color: #BBB;" name="email" required oninvalid="this.setCustomValidity('Email tidak boleh kosong')" oninput="this.setCustomValidity('')" value="<?php echo $row['email']; ?>" disabled>
+                            <input type="email" id="email" aria-describedby="emailHelp" style="margin-top: 18px; color: #BBB;" name="email" required oninvalid="this.setCustomValidity('Email tidak boleh kosong')" oninput="this.setCustomValidity('')" value="<?php echo $row['email']; ?>" readonly>
                         </div>
                         <label class="jk-label mb-2">Jenis Kelamin</label>
                         <div class="d-flex mb-4">

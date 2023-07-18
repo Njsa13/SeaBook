@@ -77,12 +77,6 @@ footer p {
 		margin-left: 300px;
 		width: 1000px;
 	}
-
-	/*No Data*/
-	.no-data {
-		position: absolute;
-		left: 220px;
-	}
 }
 
 /*Jumbotron*/
@@ -91,12 +85,7 @@ footer p {
 	height: 430px;
 }
 
-
-.jumbotron h1 {
-
-}
-
-.jumbotron h1, .jumbotron p, .book-title {
+.jumbotron h1, .jumbotron p, .book-title, .description {
 	font-family: "Raleway", "Verdana", sans-serif;
 }
 
@@ -105,7 +94,7 @@ footer p {
 }
 
 /*Content*/
-.jumbotron h1, .content h5, .more, .price, .login h1, .profile-menu h1, .profile-menu h5 {
+.jumbotron h1, .content h5, .more, .price, .login h1, .profile-menu h1, .profile-menu h5, .book-title, .description {
 	font-weight: 900;
 	letter-spacing: 2px;
 }
@@ -157,7 +146,7 @@ html .login-page {
 	color: #2FA0D0;
 }
 
-.profile-menu .card, .accordion-item, .cart .card {
+.profile-menu .card, .accordion-item, .cart .card, .buku .card, .checkout .card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .15);
 }
 
@@ -220,4 +209,3 @@ html .login-page {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-

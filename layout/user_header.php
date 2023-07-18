@@ -7,9 +7,9 @@
         <div class="collapse navbar-collapse pt-4 pt-lg-0" id="navbarNav">
           <ul class="navbar-nav container-fluid justify-content-between">
             <li class="nav-item order-lg-second">
-              <form class="d-flex input-group" role="search">
-                <input type="search" class="form-control" placeholder="  Cari Judul Buku" aria-label="Search" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary pb-2 pe-3" type="button" id="button-addon2">
+              <form class="d-flex input-group" role="search" method="GET" action="search.php">
+                <input type="search" name="search" class="form-control" placeholder="  Cari Judul Buku" aria-label="Search" aria-describedby="button-addon2" value="<?php if(isset($_GET['search'])) echo $_GET['search'];?>" required oninvalid="this.setCustomValidity('Masukan kata kunci')" oninput="this.setCustomValidity('')">
+                <button class="btn btn-outline-secondary pb-2 pe-3" type="submit" id="button-addon2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                   </svg>
@@ -40,14 +40,14 @@
                 Kategori
               </a>
               <ul class="dropdown-menu overflow-x-hidden">
-                <li><a class="dropdown-item" href="#">Arsitektur</a></li>
-                <li><a class="dropdown-item" href="#">Berkebun</a></li>
-                <li><a class="dropdown-item" href="#">Bisnis & Ekonomi</a></li>
-                <li><a class="dropdown-item" href="#">Fiksi</a></li>
-                <li><a class="dropdown-item" href="#">Humor</a></li>
-                <li><a class="dropdown-item" href="#">Komputer</a></li>
-                <li><a class="dropdown-item" href="#">Matematika</a></li>
-                <li><a class="dropdown-item" href="#">Sains</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Arsitektur">Arsitektur</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Berkebun">Berkebun</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Bisnis%20%26%20Ekonomi">Bisnis & Ekonomi</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Fiksi">Fiksi</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Humor">Humor</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Komputer">Komputer</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Matematika">Matematika</a></li>
+                <li><a class="dropdown-item" href="search.php?kat=Sains">Sains</a></li>
               </ul>
             </li>
             <li class="nav-item bag-logo">

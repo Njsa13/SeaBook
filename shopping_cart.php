@@ -20,21 +20,20 @@ if (!empty($_SESSION['email'])) {
 
     $total = 0;
     $email = $_SESSION['email'];
-    $query = "SELECT id_keranjang, gambar, judul_buku, harga, jumlah_buku*harga AS subtotal, jumlah_buku FROM keranjang LEFT JOIN buku USING(id_buku) LEFT JOIN user USING(id_user) WHERE email = '$email' AND id_transaksi IS NULL;";
+    $query = "SELECT keranjang.id_buku, id_keranjang, gambar, judul_buku, harga, jumlah_buku*harga AS subtotal, jumlah_buku FROM keranjang LEFT JOIN buku USING(id_buku) LEFT JOIN user USING(id_user) WHERE email = '$email' AND id_transaksi IS NULL;";
     $result = mysqli_query($link, $query);
     ?>
     <br><br>
     <section class="cart flex-grow-1">
       <div class="container mt-5">
-        <div class="row mb-4 justify-content-around">
-          <div class="col-11 col-lg-8">
+        <div class="row mb-4">
+          <div class="col-11 col-lg-12 ms-3">
             <h5 class="fw-bold">Keranjang Belanja</h5>
           </div>
-          <div class="col-3 d-none d-lg-block"></div>
         </div>
 
         <div class="row justify-content-around">
-          <div class="col-11 col-lg-8 mb-5 position-relative">
+          <div class="col-11 col-lg-8 mb-5">
             <?php
               if (mysqli_num_rows($result)!=0) {
               while ($row = mysqli_fetch_assoc($result)) { 
@@ -56,12 +55,13 @@ if (!empty($_SESSION['email'])) {
                     " width="50px">
                   </div>
                   <div class="col-3 col-lg-4 d-flex flex-column me-lg-5 me-3">
-                    <strong class="mb-1 shorten-text" style="font-size: 12px;"><?php
-                        echo $row['judul_buku']; 
-                      
-                    ?></strong>
-                    <span class="mb-1" style="font-size: 12px;">Rp. <?php echo number_format($row['harga'], 0, ",", "."); ?></span>
-                    <span style="font-size: 12px; color: #2FA0D0;">Rp. <?php echo number_format($row['subtotal'], 0, ",", "."); ?></span>
+                    <a href="detail.php?id=<?php echo $row['id_buku']; ?>" style="text-decoration: none;">
+                      <strong class="mb-1 shorten-text" style="font-size: 12px;"><?php
+                          echo $row['judul_buku']; 
+                      ?></strong>
+                    </a>
+                    <span class="mb-1 harga" style="font-size: 12px;">Rp. <?php echo number_format($row['harga'], 0, ",", "."); ?></span>
+                    <span style="font-size: 12px; color: #2FA0D0;" class="subtotal" data-harga="<?php echo $row['harga']; ?>">Rp. <?php echo number_format($row['subtotal'], 0, ",", "."); ?></span>
                   </div>
                   <div class="col-lg-3 col-5 d-flex align-items-center me-1 me-lg-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" data-id="<?php echo $row['id_keranjang']; ?>" class="minus bi bi-dash-circle-fill <?php echo 'minus'.$row['id_keranjang']; ?>" viewBox="0 0 16 16">
@@ -83,7 +83,11 @@ if (!empty($_SESSION['email'])) {
               </div>
             </div>
             <?php } } else
-              echo '<img src="assets/img/nodata.png" class="no-data mt-5 ms-5 ms-lg-0">';
+            echo '
+              <div class="justify-content-center d-flex">
+                <img src="assets/img/nodata.png" class="mt-5" width="360px">
+              </div>
+            ';
             ?>
           </div>
           <div class="col-8 col-lg-3 mb-4">
@@ -91,8 +95,8 @@ if (!empty($_SESSION['email'])) {
               <div class="card-body mt-3 text-center">
                 <h5>Total Harga</h5>
                 <hr>
-                <h5 class="text-info mb-3">Rp. <?php echo number_format($total, 0, ",", "."); ?></h5>
-                <a href="" class="btn btn-primary 
+                <h5 class="text-info mb-3 totalHarga">Rp. <?php echo number_format($total, 0, ",", "."); ?></h5>
+                <a href="checkout.php" class="btn btn-primary 
                 <?php
                 if ($total == 0) {
                   echo 'disabled';
@@ -110,12 +114,17 @@ if (!empty($_SESSION['email'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
       $(document).on('click', '.plus, .minus', function() {
         var button = $(this);
         var id = button.data('id');
         var action = button.hasClass('plus') ? 'plus' : 'minus';
         var counter = button.siblings('.counter');
+        var harga = button.closest('.card-body').find('.subtotal').data('harga');
+        var subtotalElement = button.closest('.card-body').find('.subtotal');
+        var totalHargaElement = $('.totalHarga');
 
         var newValue = parseInt(counter.val());
         var oldValue = newValue;
@@ -125,6 +134,16 @@ if (!empty($_SESSION['email'])) {
           newValue = newValue > 1 ? newValue - 1 : newValue;
         }
         counter.val(newValue);
+
+        var newSubtotal = harga * newValue;
+        subtotalElement.text('Rp. ' + newSubtotal.toLocaleString('id-ID'));
+
+        var newTotalHarga = 0;
+        $('.subtotal').each(function() {
+          newTotalHarga += parseInt($(this).text().replace(/[^\d]/g, ''));
+        });
+
+        totalHargaElement.text('Rp. ' + newTotalHarga.toLocaleString('id-ID'));
         
         $.ajax({
           url: 'update_cart.php',
