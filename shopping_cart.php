@@ -19,8 +19,9 @@ if (!empty($_SESSION['email'])) {
     include 'lib/connection.php';
 
     $total = 0;
+    $buku_habis = array();
     $email = $_SESSION['email'];
-    $query = "SELECT keranjang.id_buku, id_keranjang, gambar, judul_buku, harga, jumlah_buku*harga AS subtotal, jumlah_buku FROM keranjang LEFT JOIN buku USING(id_buku) LEFT JOIN user USING(id_user) WHERE email = '$email' AND id_transaksi IS NULL;";
+    $query = "SELECT keranjang.id_buku, id_keranjang, gambar, judul_buku, harga, jumlah_buku*harga AS subtotal, jumlah_buku, stok_buku FROM keranjang LEFT JOIN buku USING(id_buku) LEFT JOIN user USING(id_user) WHERE email = '$email' AND id_transaksi IS NULL;";
     $result = mysqli_query($link, $query);
     ?>
     <br><br>
@@ -38,6 +39,9 @@ if (!empty($_SESSION['email'])) {
               if (mysqli_num_rows($result)!=0) {
               while ($row = mysqli_fetch_assoc($result)) { 
               $total = $total + $row['subtotal'];
+                if ($row['stok_buku'] < $row['jumlah_buku']) {
+                  $buku_habis[] = $row['judul_buku'];
+                }
             ?>
             <div class="row mb-3">
               <div class="card border border-0">
@@ -91,20 +95,33 @@ if (!empty($_SESSION['email'])) {
             ?>
           </div>
           <div class="col-8 col-lg-3 mb-4">
-            <div class="card border border-0">
+            <div class="card border border-0 mb-5">
               <div class="card-body mt-3 text-center">
                 <h5>Total Harga</h5>
                 <hr>
                 <h5 class="text-info mb-3 totalHarga">Rp. <?php echo number_format($total, 0, ",", "."); ?></h5>
                 <a href="checkout.php" class="btn btn-primary 
                 <?php
-                if ($total == 0) {
+                if (($total == 0)||!empty($buku_habis)) {
                   echo 'disabled';
                 }
                 ?>
                 ">Bayar Sekarang</a>
               </div>
             </div>
+            <?php if (!empty($buku_habis)) { ?>
+            <div class="alert alert-danger text-center">
+              <strong style="color: black;">Perhatian!</strong>
+              <span> Stok buku habis</span><br><br>
+              <?php
+              $tanda = '<strong style="color: black;">Judul Buku : </strong>';
+              foreach ($buku_habis as $value) {
+                echo '<span>'.$tanda.$value.'</span>';
+                $tanda = ', ';
+              }
+              ?>
+            </div>
+            <?php } else {echo '';} ?>
           </div>
         </div>
 

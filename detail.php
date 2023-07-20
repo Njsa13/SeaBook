@@ -11,6 +11,15 @@ session_start();
     $query = "SELECT * FROM buku WHERE id_buku = '$id_buku';";
     $result = mysqli_query($link, $query);
     $data = mysqli_fetch_assoc($result);
+
+    $stok_buku = $data['stok_buku'];
+    $disabled = '';
+    $ket_stok= '';
+
+    if ($stok_buku < 1) {
+      $disabled = 'disabled';
+      $ket_stok = '<div class="alert alert-danger text-center"><strong>Perhatian!</strong> Stok buku habis</div>';
+    }
   ?>
   <head>
     <meta charset="utf-8">
@@ -57,11 +66,12 @@ session_start();
             <h5 class="writter" style="font-size: 20px;"><?php echo $data['penulis']; ?></h5>
             <h3 class="book-title mt-2"><?php echo $data['judul_buku']; ?></h3>
             <div class="row mt-4">
+              <?php echo $ket_stok; ?>
               <div class="col-6 d-grid gap-2">
-              <a href="checkout.php?id=<?php echo $id_buku.'&harga='.$data['harga']; ?>" class="btn btn-primary">Beli Rp <?php echo number_format($data['harga'], 0, ",", "."); ?></a>
+              <a href="checkout.php?id=<?php echo $id_buku.'&harga='.$data['harga']; ?>" class="btn btn-primary <?php echo $disabled; ?>">Beli Rp <?php echo number_format($data['harga'], 0, ",", "."); ?></a>
               </div>
               <div class="col-6 d-grid gap-2">
-              <a href="cart_save_action.php?id=<?php echo $id_buku.'&harga='.$data['harga']; ?>" class="btn btn-outline-primary">Keranjang</a>
+              <a href="cart_save_action.php?id=<?php echo $id_buku.'&harga='.$data['harga']; ?>" class="btn btn-outline-primary <?php echo $disabled; ?>">Keranjang</a>
               </div>
             </div>
             <div class="row mt-4">
