@@ -112,7 +112,7 @@ if (!empty($_SESSION['email'])) {
             <?php if (!empty($buku_habis)) { ?>
             <div class="alert alert-danger text-center">
               <strong style="color: black;">Perhatian!</strong>
-              <span> Stok buku habis</span><br><br>
+              <span> Stok Terbatas</span><br><br>
               <?php
               $tanda = '<strong style="color: black;">Judul Buku : </strong>';
               foreach ($buku_habis as $value) {
